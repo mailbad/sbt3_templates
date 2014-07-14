@@ -1,0 +1,14 @@
+[
+    {
+        "keys": ["ctrl+alt++shift+s"], "command": "sublime_tmpl",
+        "args": {"type": "Bash"}
+    },
+    {
+        "keys": ["ctrl+alt++shift+e"], "command": "sublime_tmpl",
+        "args": {"type": "Perl"}
+    },
+    {
+        "keys": ["ctrl+n"], "command": "sublime_tmpl",
+        "args": {"type": "Bash"}
+    }
+]

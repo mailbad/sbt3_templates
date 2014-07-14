@@ -1,0 +1,12 @@
+{
+    "Bash": {
+        "syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
+    },
+    "date_format" : "%Y-%m-%d %H:%M:%S",
+    "attr": {
+        "author": "zert" ,
+        "email": "liguopeng@eyou.net",
+        "link": "https://github.com/mailbad",
+        "version": "0.1"
+    }
+}
