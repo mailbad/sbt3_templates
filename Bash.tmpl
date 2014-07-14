@@ -72,6 +72,8 @@ INIT_ECHO () {
 	elif [ "\${ECHO_Debug}" -eq "1" ] && [ "\${ECHO_display}" -eq "0" ] && [ ! -z "\${ECHO_Filename}" ]; then
 		#[ "\${Script_Debug}" -eq "1" ] && echo -e \${ECHO_State_Message}
 		echo -e \${ECHO_State_Message} >> \${ECHO_Filename}
+	else
+		return 1;
 	fi
 }
 
