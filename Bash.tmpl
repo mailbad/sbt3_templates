@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+# -*- zh_CN.utf-8 -*-
+# @Date    : ${date}
+# @Author  : ${author} (${email})
+# @Link    : ${link}
+# @Version : \$Id\$ (${version})
+
+###########
+# Config  #
+###########
+# Script disaply/debug 0-disable 1-enable
+Script_Display="1"
+Script_Debug="0"
+
+###########
+# Default #
+###########
+# Script Route
+Script_Path="\$(cd \$(dirname \${0});pwd -P)"
+
+# Init Script echo message
+# State Mode: OK ERR NO OK_D ERR_D NO_D
+# Test cases: [ INIT_ECHO OK 0 "this is test" 1 test.txt ]
+# Explain : [ INIT_ECHO State_ok Debug_off "message" display_on fileroute_on ]
+INIT_ECHO () {
+	local ECHO_State="\${1}"
+	local ECHO_Debug="\${2}"
+	local ECHO_Message="\${3}"
+	local ECHO_display="\${4}"
+	local ECHO_Filename="\${5}"
+	if [ "\${ECHO_State}" == "OK" ] || [ "\${ECHO_State}" == "ok" ]; then
+		local ECHO_State_Message="[\033[0;32m \${ECHO_Message} \033[0m]"
+	elif [ "\${ECHO_State}" == "ERR" ] || [ "\${ECHO_State}" == "err" ]; then
+		local ECHO_State_Message="[\033[0;31m\$(date +'%F %H:%M:%S') \${ECHO_Message} \033[0m]"
+	elif [ "\${ECHO_State}" == "NO" ] || [ "\${ECHO_State}" == "no" ]; then
+		local ECHO_State_Message="[ \${ECHO_Message} ]"
+	elif [ "\${ECHO_State}" == "OK_D" ] || [ "\${ECHO_State}" == "ok_d" ]; then
+		local ECHO_State_Message="\$(date +'%F %H:%M:%S')		[\033[0;32m \${ECHO_Message} \033[0m]"
+	elif [ "\${ECHO_State}" == "ERR_D" ] || [ "\${ECHO_State}" == "err_d" ]; then
+		local ECHO_State_Message="\$(date +'%F %H:%M:%S')		[\033[0;31m\$(date +'%F %H:%M:%S') \${ECHO_Message} \033[0m]"
+	elif [ "\${ECHO_State}" == "NO_D" ] || [ "\${ECHO_State}" == "no_d" ]; then
+		local ECHO_State_Message="\$(date +'%F %H:%M:%S')		[ \${ECHO_Message} ]"
+	else
+		return 1;
+	fi
+
+	if [ "\${ECHO_Debug}" -eq "0" ] && [ "\${ECHO_display}" -eq "1" ] && [ -z "\${ECHO_Filename}" ]; then
+		[ "${Script_Display}" -eq == "1" ] && echo -e \${ECHO_State_Message}
+		#echo -e \${ECHO_State_Message} >> \${ECHO_Filename}
+	elif [ "\${ECHO_Debug}" -eq "0" ] && [ "\${ECHO_display}" -eq "0" ] && [ -z "\${ECHO_Filename}" ]; then
+		#echo -e \${ECHO_State_Message}
+		#echo -e \${ECHO_State_Message} >> \${ECHO_Filename}
+		:
+	elif [ "\${ECHO_Debug}" -eq "0" ] && [ "\${ECHO_display}" -eq "1" ] && [ ! -z "\${ECHO_Filename}" ]; then
+		[ "${Script_Display}" -eq == "1" ] && echo -e \${ECHO_State_Message}
+		wait;
+		echo -e \${ECHO_State_Message} >> \${ECHO_Filename}
+	elif [ "\${ECHO_Debug}" -eq "0" ] && [ "\${ECHO_display}" -eq "0" ] && [ ! -z "\${ECHO_Filename}" ]; then
+		#[ "${Script_Display}" -eq == "1" ] && echo -e \${ECHO_State_Message}
+		echo -e \${ECHO_State_Message} >> \${ECHO_Filename}
+	elif [ "\${ECHO_Debug}" -eq "1" ] && [ "\${ECHO_display}" -eq "1" ] && [ -z "\${ECHO_Filename}" ]; then
+		[ "\${Script_Debug}" -eq "1" ] && echo -e \${ECHO_State_Message}
+		#echo -e \${ECHO_State_Message} >> \${ECHO_Filename}
+	elif [ "\${ECHO_Debug}" -eq "1" ] && [ "\${ECHO_display}" -eq "0" ] && [ -z "\${ECHO_Filename}" ]; then
+		#[ "\${Script_Debug}" -eq "1" ] && echo -e \${ECHO_State_Message}
+		#echo -e \${ECHO_State_Message} >> \${ECHO_Filename}
+		:
+	elif [ "\${ECHO_Debug}" -eq "1" ] && [ "\${ECHO_display}" -eq "1" ] && [ ! -z "\${ECHO_Filename}" ]; then
+		[ "\${Script_Debug}" -eq "1" ] && echo -e \${ECHO_State_Message}
+		wait;
+		echo -e \${ECHO_State_Message} >> \${ECHO_Filename}
+	elif [ "\${ECHO_Debug}" -eq "1" ] && [ "\${ECHO_display}" -eq "0" ] && [ ! -z "\${ECHO_Filename}" ]; then
+		#[ "\${Script_Debug}" -eq "1" ] && echo -e \${ECHO_State_Message}
+		echo -e \${ECHO_State_Message} >> \${ECHO_Filename}
+	fi
+}
+
+#unset Script_Debug
