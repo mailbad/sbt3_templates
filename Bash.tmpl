@@ -46,18 +46,18 @@ INIT_ECHO () {
 	fi
 
 	if [ "\${ECHO_Debug}" -eq "0" ] && [ "\${ECHO_display}" -eq "1" ] && [ -z "\${ECHO_Filename}" ]; then
-		[ "${Script_Display}" -eq == "1" ] && echo -e \${ECHO_State_Message}
+		[ "\${Script_Display}" -eq == "1" ] && echo -e \${ECHO_State_Message}
 		#echo -e \${ECHO_State_Message} >> \${ECHO_Filename}
 	elif [ "\${ECHO_Debug}" -eq "0" ] && [ "\${ECHO_display}" -eq "0" ] && [ -z "\${ECHO_Filename}" ]; then
 		#echo -e \${ECHO_State_Message}
 		#echo -e \${ECHO_State_Message} >> \${ECHO_Filename}
 		:
 	elif [ "\${ECHO_Debug}" -eq "0" ] && [ "\${ECHO_display}" -eq "1" ] && [ ! -z "\${ECHO_Filename}" ]; then
-		[ "${Script_Display}" -eq == "1" ] && echo -e \${ECHO_State_Message}
+		[ "\${Script_Display}" -eq == "1" ] && echo -e \${ECHO_State_Message}
 		wait;
 		echo -e \${ECHO_State_Message} >> \${ECHO_Filename}
 	elif [ "\${ECHO_Debug}" -eq "0" ] && [ "\${ECHO_display}" -eq "0" ] && [ ! -z "\${ECHO_Filename}" ]; then
-		#[ "${Script_Display}" -eq == "1" ] && echo -e \${ECHO_State_Message}
+		#[ "\${Script_Display}" -eq == "1" ] && echo -e \${ECHO_State_Message}
 		echo -e \${ECHO_State_Message} >> \${ECHO_Filename}
 	elif [ "\${ECHO_Debug}" -eq "1" ] && [ "\${ECHO_display}" -eq "1" ] && [ -z "\${ECHO_Filename}" ]; then
 		[ "\${Script_Debug}" -eq "1" ] && echo -e \${ECHO_State_Message}
